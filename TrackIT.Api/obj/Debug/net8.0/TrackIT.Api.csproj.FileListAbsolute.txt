@@ -30,3 +30,6 @@ C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\MiniValidation
 C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT.Api.csproj.AssemblyReference.cache
 C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT..D5612358.Up2Date
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll

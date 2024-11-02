@@ -8,7 +8,7 @@ GET http://localhost:5075/transactions/1
 GET http://localhost:5075/categories
 
 ###
-GET http://localhost:5075/categories/1
+GET http://localhost:5075/categories/55
 
 # POST Requests
 ###
