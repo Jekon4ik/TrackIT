@@ -9,8 +9,8 @@ public static class CategoriesEndpoints{
 
     public static RouteGroupBuilder MapCategoriesEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("categories").WithParameterValidation();
-
+        
+        var group = app.MapGroup("categories").WithParameterValidation().WithTags("Categories");
         group.MapGet("/", ()=> CategoryData.categoriesList);
         
         group.MapGet("/{id}", (int id)=> 

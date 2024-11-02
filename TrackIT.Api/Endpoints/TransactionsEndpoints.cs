@@ -9,7 +9,7 @@ public static class TransactionsEndpoints
 
     public static RouteGroupBuilder MapTransactionsEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("transactions").WithParameterValidation();
+        var group = app.MapGroup("transactions").WithParameterValidation().WithTags("Transactions");
     
         group.MapGet("/", ()=> TransactionData.transactionsList);
 
