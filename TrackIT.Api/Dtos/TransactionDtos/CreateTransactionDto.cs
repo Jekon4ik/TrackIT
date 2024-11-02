@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TrackIT.Api.Dtos;
 
 public record class CreateTransactionDto(
-    decimal Amount, 
+    [Required] [Range(1,999999)]decimal Amount, 
     DateOnly Date,
-    int CategoryId,
+    [Required]int CategoryId,
     string Description);

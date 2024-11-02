@@ -24,3 +24,9 @@ C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\refint\TrackIT
 C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT.Api.pdb
 C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT.Api.genruntimeconfig.cache
 C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\ref\TrackIT.Api.dll
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\MinimalApis.Extensions.dll
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\bin\Debug\net8.0\MiniValidation.dll
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT.Api.csproj.AssemblyReference.cache
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Games\ASP_DOTNET\REST_API\TrackIT\TrackIT.Api\obj\Debug\net8.0\TrackIT..D5612358.Up2Date

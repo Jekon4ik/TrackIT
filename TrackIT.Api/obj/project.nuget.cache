@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "WmOo/of3z70=",
+  "dgSpecHash": "7ANffCoGBfA=",
   "success": true,
   "projectFilePath": "C:\\Games\\ASP_DOTNET\\REST_API\\TrackIT\\TrackIT.Api\\TrackIT.Api.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\forcs\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\forcs\\.nuget\\packages\\minimalapis.extensions\\0.11.0\\minimalapis.extensions.0.11.0.nupkg.sha512",
+    "C:\\Users\\forcs\\.nuget\\packages\\minivalidation\\0.8.0\\minivalidation.0.8.0.nupkg.sha512"
+  ],
   "logs": []
 }

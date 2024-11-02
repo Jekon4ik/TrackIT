@@ -7,9 +7,9 @@ public static class CategoryData
 {
     public static List<CategoryDto> categoriesList {get;} = [
     new(
-    1,
-    "Salary",
-    "Income"    
+        1,
+        "Salary",
+        "Income"    
     ),
     new(
         2,
