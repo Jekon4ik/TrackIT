@@ -1,57 +1,7 @@
-# GET Requests
-GET http://localhost:5075/transactions
-
-###
-GET http://localhost:5075/transactions/1
-
-###
-GET http://localhost:5075/categories
-
-###
-GET http://localhost:5075/categories/55
-
-# POST Requests
-###
-POST http://localhost:5075/transactions
-Content-Type: application/json
-
-{
-    "amount": 12,
-    "date": "2024-11-12",
-    "categoryId": 1
-}
-
-###
-POST http://localhost:5075/categories
-Content-Type: application/json
-
-{
-    "type": "Expenses"
-}
-
-# PUT Requests
-###
-PUT http://localhost:5075/transactions/1
-Content-Type: application/json
-
-{
-    "amount": 200.75,
-    "date": "2024-11-12",
-    "categoryId": 2
-}
-
-###
 PUT http://localhost:5075/categories/1
 Content-Type: application/json
 
 {
-    "name": "Updated Ca",
+    "name": "Updated",
     "type": "Income"
 }
-
-# DELETE Requests
-###
-DELETE http://localhost:5075/transactions/1
-
-###
-DELETE http://localhost:5075/categories/1

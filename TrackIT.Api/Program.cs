@@ -1,5 +1,4 @@
 using TrackIT.Api.Endpoints;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -9,7 +8,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 
-
 app.MapCategoriesEndpoints();
 
 app.MapTransactionsEndpoints();
@@ -17,3 +15,5 @@ app.MapTransactionsEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.Run();
+
+

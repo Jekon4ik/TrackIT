@@ -9,6 +9,7 @@
       "TrackIT.Api/1.0.0": {
         "dependencies": {
           "MinimalApis.Extensions": "0.11.0",
+          "Swashbuckle.AspNetCore": "6.9.0",
           "Swashbuckle.AspNetCore.Swagger": "6.9.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.9.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.9.0"
@@ -17,6 +18,7 @@
           "TrackIT.Api.dll": {}
         }
       },
+      "Microsoft.Extensions.ApiDescription.Server/6.0.5": {},
       "Microsoft.OpenApi/1.6.14": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
@@ -43,6 +45,14 @@
             "assemblyVersion": "0.8.0.0",
             "fileVersion": "0.8.0.0"
           }
+        }
+      },
+      "Swashbuckle.AspNetCore/6.9.0": {
+        "dependencies": {
+          "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
+          "Swashbuckle.AspNetCore.Swagger": "6.9.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.9.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.9.0"
         }
       },
       "Swashbuckle.AspNetCore.Swagger/6.9.0": {
@@ -83,6 +93,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ckb5EDBUNJdFWyajfXzUIMRkhf52fHZOQuuZg/oiu8y7zDCVwD0iHhew6MnThjHmevanpxL3f5ci2TtHQEN6bw==",
+      "path": "microsoft.extensions.apidescription.server/6.0.5",
+      "hashPath": "microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512"
+    },
     "Microsoft.OpenApi/1.6.14": {
       "type": "package",
       "serviceable": true,
@@ -103,6 +120,13 @@
       "sha512": "sha512-OcYFgtI6yDoVaEtVAQQHvGHbI4TBJ9dRrPJEqtcHtJjoGtpS0pM0uTuNLJaO3txvq6TcYqus4LFMQv5/LZegtg==",
       "path": "minivalidation/0.8.0",
       "hashPath": "minivalidation.0.8.0.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore/6.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lvI+XHF21tkwXd2nDCLGJsdhdUYsY3Ax2fWUlvw81Oa6EedtnIAf5tThy8ZnPcz/9/TwsLgjgtX9ifOCIjbEPA==",
+      "path": "swashbuckle.aspnetcore/6.9.0",
+      "hashPath": "swashbuckle.aspnetcore.6.9.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore.Swagger/6.9.0": {
       "type": "package",

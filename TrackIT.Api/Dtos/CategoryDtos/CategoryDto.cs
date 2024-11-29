@@ -1,3 +1,4 @@
+
 namespace TrackIT.Api.Dtos;
 
 public record class CategoryDto(
