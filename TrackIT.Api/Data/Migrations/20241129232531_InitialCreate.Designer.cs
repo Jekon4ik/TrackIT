@@ -11,7 +11,7 @@ using TrackIT.Api.Data;
 namespace TrackIT.Api.Data.Migrations
 {
     [DbContext(typeof(TrackITContext))]
-    [Migration("20241129202351_InitialCreate")]
+    [Migration("20241129232531_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,7 +37,7 @@ namespace TrackIT.Api.Data.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("TrackIT.Api.Entities.CategoryType", b =>
@@ -53,6 +53,18 @@ namespace TrackIT.Api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CategoryTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Outcome"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Income"
+                        });
                 });
 
             modelBuilder.Entity("TrackIT.Api.Entities.Transaction", b =>
@@ -77,7 +89,7 @@ namespace TrackIT.Api.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Transaction");
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("TrackIT.Api.Entities.Category", b =>

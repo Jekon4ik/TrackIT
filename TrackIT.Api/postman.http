@@ -1,7 +1,28 @@
-PUT http://localhost:5075/categories/1
+POST http://localhost:5075/transactions/
 Content-Type: application/json
 
 {
-    "name": "Updated",
-    "type": "Income"
+    "amount" : 15.99,
+    "date" : "2024-11-18",
+    "categoryId": 1,
+    "description" : "bebra"
+}
+###
+POST http://localhost:5075/transactions/
+Content-Type: application/json
+
+{
+    "amount" : 15.99,
+    "date" : "2024-11-18",
+    "categoryId": 1,
+    "description" : "bebra"
+}
+###
+
+POST http://localhost:5075/categories/
+Content-Type: application/json
+
+{
+   "name" : "Shopping",
+   "typeId" : 1
 }

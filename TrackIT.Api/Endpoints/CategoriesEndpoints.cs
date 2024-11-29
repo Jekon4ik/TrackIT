@@ -1,6 +1,7 @@
 using System;
 using TrackIT.Api.Data;
 using TrackIT.Api.Dtos;
+using TrackIT.Api.Entities;
 
 namespace TrackIT.Api.Endpoints;
 
@@ -20,15 +21,22 @@ public static class CategoriesEndpoints{
                 return category is null ? Results.NotFound() : Results.Ok(category);
             }).WithName(GetCategoryEndpointName);
         
-        group.MapPost("/", (CreateCategoryDto newCategory) => 
+        group.MapPost("/", (CreateCategoryDto newCategory, TrackITContext dbContext) => 
             {
-                CategoryDto category = new (
-                    CategoryData.categoriesList.Count() +1,
-                    newCategory.Name,
-                    newCategory.Type
+                Category category = new () {
+                    Name = newCategory.Name,
+                    Type = dbContext.CategoryTypes.Find(newCategory.TypeId),
+                    TypeId = newCategory.TypeId
+                };
+                dbContext.Categories.Add(category);
+                dbContext.SaveChanges();
+                CategoryDto categoryDto = new(
+                    category.Id,
+                    category.Name,
+                    category.Type!.Name
                 );
-                CategoryData.categoriesList.Add(category);
-                return Results.CreatedAtRoute(GetCategoryEndpointName, new{id = category.Id}, category);
+
+                return Results.CreatedAtRoute(GetCategoryEndpointName, new{id = category.Id}, categoryDto);
             });
 
         group.MapPut("/{id}", (int id, UpdateCategoryDto updatedCategory) =>

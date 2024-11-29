@@ -1,6 +1,7 @@
 using System;
 using TrackIT.Api.Data;
 using TrackIT.Api.Dtos;
+using TrackIT.Api.Entities;
 namespace TrackIT.Api.Endpoints;
 
 public static class TransactionsEndpoints
@@ -19,18 +20,27 @@ public static class TransactionsEndpoints
             return transaction is null ? Results.NotFound() : Results.Ok(transaction);
             }).WithName(GetTransactionEndpointName);
 
-        group.MapPost("/", (CreateTransactionDto newTransaction) => 
+        group.MapPost("/", (CreateTransactionDto newTransaction, TrackITContext dbContext) => 
             {
-            TransactionDto transaction = new (
-                TransactionData.transactionsList.Count() +1,
-                newTransaction.Amount,
-                newTransaction.Date,
-                newTransaction.CategoryId,
-                newTransaction.Description
-                );
-            TransactionData.transactionsList.Add(transaction);
+                Transaction transaction= new(){
+                    Amount = newTransaction.Amount,
+                    Date = newTransaction.Date,
+                    CategoryId = newTransaction.CategoryId,
+                    Category = dbContext.Categories.Find(newTransaction.CategoryId),
+                    Description = newTransaction.Description
+                };
+                dbContext.Transactions.Add(transaction);
+                dbContext.SaveChanges();    
 
-            return Results.CreatedAtRoute(GetTransactionEndpointName, new{id = transaction.Id}, transaction);
+                TransactionDto transactionDto = new(
+                    transaction.Id,
+                    transaction.Amount,
+                    transaction.Date,
+                    transaction.Category!.Id,
+                    transaction.Description
+                );      
+
+            return Results.CreatedAtRoute(GetTransactionEndpointName, new{id = transaction.Id}, transactionDto);
             });
 
         group.MapPut("/{id}", (int id, UpdateTransactionDto updatedTransaction) => 

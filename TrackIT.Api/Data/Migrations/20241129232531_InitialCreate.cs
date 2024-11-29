@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TrackIT.Api.Data.Migrations
 {
     /// <inheritdoc />
@@ -25,7 +27,7 @@ namespace TrackIT.Api.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -35,9 +37,9 @@ namespace TrackIT.Api.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Category_CategoryTypes_TypeId",
+                        name: "FK_Categories_CategoryTypes_TypeId",
                         column: x => x.TypeId,
                         principalTable: "CategoryTypes",
                         principalColumn: "Id",
@@ -45,7 +47,7 @@ namespace TrackIT.Api.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transaction",
+                name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -57,23 +59,32 @@ namespace TrackIT.Api.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transaction", x => x.Id);
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transaction_Category_CategoryId",
+                        name: "FK_Transactions_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "CategoryTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Outcome" },
+                    { 2, "Income" }
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Category_TypeId",
-                table: "Category",
+                name: "IX_Categories_TypeId",
+                table: "Categories",
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transaction_CategoryId",
-                table: "Transaction",
+                name: "IX_Transactions_CategoryId",
+                table: "Transactions",
                 column: "CategoryId");
         }
 
@@ -81,10 +92,10 @@ namespace TrackIT.Api.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "CategoryTypes");
