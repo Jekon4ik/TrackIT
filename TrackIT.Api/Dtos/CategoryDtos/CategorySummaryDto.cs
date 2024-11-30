@@ -1,7 +1,7 @@
 
 namespace TrackIT.Api.Dtos;
 
-public record class CategoryDto(
+public record class CategorySummaryDto(
     int Id,
     string Name,
     string Type

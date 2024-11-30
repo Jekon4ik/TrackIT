@@ -1,7 +1,9 @@
 using System;
+using System.Data.Common;
 using TrackIT.Api.Data;
 using TrackIT.Api.Dtos;
 using TrackIT.Api.Entities;
+using TrackIT.Api.Mapping;
 
 namespace TrackIT.Api.Endpoints;
 
@@ -14,29 +16,21 @@ public static class CategoriesEndpoints{
         var group = app.MapGroup("categories").WithParameterValidation().WithTags("Categories");
         group.MapGet("/", ()=> CategoryData.categoriesList);
         
-        group.MapGet("/{id}", (int id)=> 
+        group.MapGet("/{id}", (int id, TrackITContext dbContext)=> 
             {
-                CategoryDto? category = CategoryData.categoriesList.Find(category=>category.Id == id);
+                Category? category = dbContext.Categories.Find(id);
 
-                return category is null ? Results.NotFound() : Results.Ok(category);
+                return category is null ? Results.NotFound() : Results.Ok(category.toCategoryDetailsDto());
             }).WithName(GetCategoryEndpointName);
         
         group.MapPost("/", (CreateCategoryDto newCategory, TrackITContext dbContext) => 
             {
-                Category category = new () {
-                    Name = newCategory.Name,
-                    Type = dbContext.CategoryTypes.Find(newCategory.TypeId),
-                    TypeId = newCategory.TypeId
-                };
+                Category category = newCategory.toEntity();
+
                 dbContext.Categories.Add(category);
                 dbContext.SaveChanges();
-                CategoryDto categoryDto = new(
-                    category.Id,
-                    category.Name,
-                    category.Type!.Name
-                );
 
-                return Results.CreatedAtRoute(GetCategoryEndpointName, new{id = category.Id}, categoryDto);
+                return Results.CreatedAtRoute(GetCategoryEndpointName, new{id = category.Id}, category.toCategoryDetailsDto());
             });
 
         group.MapPut("/{id}", (int id, UpdateCategoryDto updatedCategory) =>
@@ -44,7 +38,7 @@ public static class CategoriesEndpoints{
                 var index = CategoryData.categoriesList.FindIndex(category=> category.Id==id);
                 if(index == -1) return Results.NotFound();
 
-                CategoryData.categoriesList[index] = new CategoryDto(
+                CategoryData.categoriesList[index] = new CategorySummaryDto(
                     id,
                     updatedCategory.Name,
                     updatedCategory.Type

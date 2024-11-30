@@ -2,6 +2,7 @@ using System;
 using TrackIT.Api.Data;
 using TrackIT.Api.Dtos;
 using TrackIT.Api.Entities;
+using TrackIT.Api.Mapping;
 namespace TrackIT.Api.Endpoints;
 
 public static class TransactionsEndpoints
@@ -14,33 +15,21 @@ public static class TransactionsEndpoints
     
         group.MapGet("/", ()=> TransactionData.transactionsList);
 
-        group.MapGet("/{id}", (int id)=> 
+        group.MapGet("/{id}", (int id, TrackITContext dbContext)=> 
             {
-            TransactionDto? transaction = TransactionData.transactionsList.Find(transaction=>transaction.Id == id);  
-            return transaction is null ? Results.NotFound() : Results.Ok(transaction);
+                Transaction? transaction = dbContext.Transactions.Find(id);
+                if(transaction == null) System.Console.WriteLine("bebra");
+                return transaction is null ? Results.NotFound() : Results.Ok(transaction.toTransactionDetailsDto());
             }).WithName(GetTransactionEndpointName);
 
         group.MapPost("/", (CreateTransactionDto newTransaction, TrackITContext dbContext) => 
             {
-                Transaction transaction= new(){
-                    Amount = newTransaction.Amount,
-                    Date = newTransaction.Date,
-                    CategoryId = newTransaction.CategoryId,
-                    Category = dbContext.Categories.Find(newTransaction.CategoryId),
-                    Description = newTransaction.Description
-                };
+                Transaction transaction = newTransaction.toEntity();
+
                 dbContext.Transactions.Add(transaction);
-                dbContext.SaveChanges();    
+                dbContext.SaveChanges();        
 
-                TransactionDto transactionDto = new(
-                    transaction.Id,
-                    transaction.Amount,
-                    transaction.Date,
-                    transaction.Category!.Id,
-                    transaction.Description
-                );      
-
-            return Results.CreatedAtRoute(GetTransactionEndpointName, new{id = transaction.Id}, transactionDto);
+            return Results.CreatedAtRoute(GetTransactionEndpointName, new{id = transaction.Id}, transaction.toTransactionDetailsDto());
             });
 
         group.MapPut("/{id}", (int id, UpdateTransactionDto updatedTransaction) => 
@@ -49,11 +38,11 @@ public static class TransactionsEndpoints
                 
             if(index == -1) return Results.NotFound();
                 
-            TransactionData.transactionsList[index] = new TransactionDto(
+            TransactionData.transactionsList[index] = new TransactionSummaryDto(
                 id,
                 updatedTransaction.Amount,
                 updatedTransaction.Date,
-                updatedTransaction.CategoryId,
+                updatedTransaction.Category,
                 updatedTransaction.Description
                 );
             return Results.NoContent();

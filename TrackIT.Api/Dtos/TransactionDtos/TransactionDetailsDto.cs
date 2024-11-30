@@ -1,6 +1,6 @@
 namespace TrackIT.Api.Dtos;
 
-public record class TransactionDto(
+public record class TransactionDetailsDto(
     int Id, 
     decimal Amount, 
     DateOnly Date,

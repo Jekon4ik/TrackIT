@@ -5,7 +5,7 @@ namespace TrackIT.Api.Data;
 
 public static class CategoryData
 {
-    public static List<CategoryDto> categoriesList {get;} = [
+    public static List<CategorySummaryDto> categoriesList {get;} = [
     new(
         1,
         "Salary",

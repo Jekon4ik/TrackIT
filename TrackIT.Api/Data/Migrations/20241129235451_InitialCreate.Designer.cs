@@ -11,7 +11,7 @@ using TrackIT.Api.Data;
 namespace TrackIT.Api.Data.Migrations
 {
     [DbContext(typeof(TrackITContext))]
-    [Migration("20241129232531_InitialCreate")]
+    [Migration("20241129235451_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
