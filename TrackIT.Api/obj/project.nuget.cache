@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "806H2woI+XU=",
+  "dgSpecHash": "uBxlRyO4sbs=",
   "success": true,
   "projectFilePath": "C:\\Games\\ASP_DOTNET\\REST_API\\TrackIT\\TrackIT.Api\\TrackIT.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\forcs\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\forcs\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\forcs\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\forcs\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\forcs\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\forcs\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",

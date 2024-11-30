@@ -32,7 +32,6 @@ public static class CategoriesEndpoints{
         group.MapPost("/", (CreateCategoryDto newCategory, TrackITContext dbContext) => 
             {
                 Category category = newCategory.toEntity();
-
                 dbContext.Categories.Add(category);
                 dbContext.SaveChanges();
 

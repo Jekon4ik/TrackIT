@@ -5,16 +5,16 @@ Content-Type: application/json
     "amount" : 15.99,
     "date" : "2024-11-18",
     "categoryId": 1,
-    "description" : "bebra"
+    "description" : ""
 }
 ###
 PUT http://localhost:5075/transactions/1
 Content-Type: application/json
 
 {
-    "amount" : 15.99,
+    "amount" : -1,
     "date" : "2024-11-18",
-    "categoryId": 1,
+    "categoryId": -4,
     "description" : "sasaj masaj"
 }
 ###
@@ -23,16 +23,16 @@ POST http://localhost:5075/categories/
 Content-Type: application/json
 
 {
-   "name" : "Salary",
-   "typeId" : 2
+    "name" : "name",
+    "typeId" : -1
 }
 ###
 PUT http://localhost:5075/categories/1
 Content-Type: application/json
 
 {
-   "name" : "Food",
-   "typeId" : 2
+   "name" : "nnn",
+   "typeId" : -2
 }
 
 ###
