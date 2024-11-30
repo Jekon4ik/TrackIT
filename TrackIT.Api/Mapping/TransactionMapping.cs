@@ -7,31 +7,45 @@ namespace TrackIT.Api.Mapping;
 public static class TransactionMapping
 {
     public static Transaction toEntity(this CreateTransactionDto transaction){
-         return new Transaction(){
-                    Amount = transaction.Amount,
-                    Date = transaction.Date,
-                    CategoryId = transaction.CategoryId,
-                    Description = transaction.Description
-                };
+        Transaction newTransaction = new Transaction(){
+            Amount = transaction.Amount,
+            Date = transaction.Date,
+            CategoryId = transaction.CategoryId,
+            Description = transaction.Description
+        };  
+        return newTransaction;    
+    }
+
+    public static Transaction toEntity(this UpdateTransactionDto transaction, int id){
+        Transaction newTransaction = new Transaction(){
+            Id = id,
+            Amount = transaction.Amount,
+            Date = transaction.Date,
+            CategoryId = transaction.CategoryId,
+            Description = transaction.Description
+        };  
+        return newTransaction;    
     }
 
     public static TransactionDetailsDto toTransactionDetailsDto(this Transaction transaction){
-        return new TransactionDetailsDto(
-                    transaction.Id,
-                    transaction.Amount,
-                    transaction.Date,
-                    transaction.Category!.Id,
-                    transaction.Description!
-                ); 
+        TransactionDetailsDto transactionDetailsDto = new(
+            transaction.Id,
+            transaction.Amount,
+            transaction.Date,
+            transaction.CategoryId,
+            transaction.Description!
+        );
+        return transactionDetailsDto;      
     }
 
     public static TransactionSummaryDto toTransactionSummaryDto(this Transaction transaction){
-        return new TransactionSummaryDto(
-                    transaction.Id,
-                    transaction.Amount,
-                    transaction.Date,
-                    transaction.Category!.Name,
-                    transaction.Description!
-                );
+        TransactionSummaryDto transactionSummaryDto = new(
+            transaction.Id,
+            transaction.Amount,
+            transaction.Date,
+            transaction.Category!.Name,
+            transaction.Description!
+        );
+        return transactionSummaryDto;  
     }
 }

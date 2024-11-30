@@ -8,14 +8,14 @@ Content-Type: application/json
     "description" : "bebra"
 }
 ###
-POST http://localhost:5075/transactions/
+PUT http://localhost:5075/transactions/1
 Content-Type: application/json
 
 {
     "amount" : 15.99,
     "date" : "2024-11-18",
     "categoryId": 1,
-    "description" : "bebra"
+    "description" : "sasaj masaj"
 }
 ###
 
@@ -23,6 +23,32 @@ POST http://localhost:5075/categories/
 Content-Type: application/json
 
 {
-   "name" : "Shopping",
-   "typeId" : 1
+   "name" : "Salary",
+   "typeId" : 2
 }
+###
+PUT http://localhost:5075/categories/1
+Content-Type: application/json
+
+{
+   "name" : "Food",
+   "typeId" : 2
+}
+
+###
+GET http://localhost:5075/transactions/6
+
+###
+GET http://localhost:5075/categories/2
+
+###
+GET http://localhost:5075/categories/
+
+###
+GET http://localhost:5075/transactions/
+
+###
+DELETE http://localhost:5075/categories/4
+
+###
+DELETE http://localhost:5075/transactions/1

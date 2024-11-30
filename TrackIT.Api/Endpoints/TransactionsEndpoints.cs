@@ -1,4 +1,5 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using TrackIT.Api.Data;
 using TrackIT.Api.Dtos;
 using TrackIT.Api.Entities;
@@ -13,44 +14,44 @@ public static class TransactionsEndpoints
     {
         var group = app.MapGroup("transactions").WithParameterValidation().WithTags("Transactions");
     
-        group.MapGet("/", ()=> TransactionData.transactionsList);
+        group.MapGet("/", (TrackITContext dbContext )=> 
+            dbContext.Transactions
+            .Include(transaction=> transaction.Category)
+            .Select(transaction=>transaction.toTransactionSummaryDto())
+            .AsNoTracking()
+        );
 
         group.MapGet("/{id}", (int id, TrackITContext dbContext)=> 
             {
                 Transaction? transaction = dbContext.Transactions.Find(id);
-                if(transaction == null) System.Console.WriteLine("bebra");
                 return transaction is null ? Results.NotFound() : Results.Ok(transaction.toTransactionDetailsDto());
             }).WithName(GetTransactionEndpointName);
 
         group.MapPost("/", (CreateTransactionDto newTransaction, TrackITContext dbContext) => 
             {
                 Transaction transaction = newTransaction.toEntity();
-
                 dbContext.Transactions.Add(transaction);
-                dbContext.SaveChanges();        
-
-            return Results.CreatedAtRoute(GetTransactionEndpointName, new{id = transaction.Id}, transaction.toTransactionDetailsDto());
+                dbContext.SaveChanges();  
+                TransactionDetailsDto transactionDetailsDto = transaction.toTransactionDetailsDto();
+                return Results.CreatedAtRoute(GetTransactionEndpointName, new{id = transaction.Id}, transactionDetailsDto);
             });
 
-        group.MapPut("/{id}", (int id, UpdateTransactionDto updatedTransaction) => 
+        group.MapPut("/{id}", (int id, UpdateTransactionDto updatedTransaction, TrackITContext dbContext) => 
             {
-            var index = TransactionData.transactionsList.FindIndex(transaction => transaction.Id == id);
+            var existingTransaction = dbContext.Transactions.Find(id);
+            if(existingTransaction is null) return Results.NotFound();
                 
-            if(index == -1) return Results.NotFound();
-                
-            TransactionData.transactionsList[index] = new TransactionSummaryDto(
-                id,
-                updatedTransaction.Amount,
-                updatedTransaction.Date,
-                updatedTransaction.Category,
-                updatedTransaction.Description
-                );
+            dbContext.Entry(existingTransaction).CurrentValues.SetValues(updatedTransaction
+            .toEntity(id));
+            dbContext.SaveChanges();
             return Results.NoContent();
             });
 
-        group.MapDelete("/{id}", (int id) => 
+        group.MapDelete("/{id}", (int id, TrackITContext dbContext) => 
             {
-            TransactionData.transactionsList.RemoveAll(transaction => transaction.Id==id);   
+            dbContext.Transactions
+                        .Where(transaction=>transaction.Id == id)
+                        .ExecuteDelete();
             return Results.NoContent();
             });
 

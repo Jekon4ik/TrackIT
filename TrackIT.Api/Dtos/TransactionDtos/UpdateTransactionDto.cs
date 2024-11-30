@@ -4,6 +4,6 @@ namespace TrackIT.Api.Dtos;
 public record class UpdateTransactionDto(
     [Required] [Range(1,999999)]decimal Amount, 
     DateOnly Date,
-    [Required]string Category,
+    [Required] int CategoryId,
     string Description
     );

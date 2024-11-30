@@ -1,5 +1,6 @@
 using System;
 using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
 using TrackIT.Api.Data;
 using TrackIT.Api.Dtos;
 using TrackIT.Api.Entities;
@@ -14,7 +15,12 @@ public static class CategoriesEndpoints{
     {
         
         var group = app.MapGroup("categories").WithParameterValidation().WithTags("Categories");
-        group.MapGet("/", ()=> CategoryData.categoriesList);
+        group.MapGet("/", (TrackITContext dbContext) => 
+            dbContext.Categories
+            .Include(category=> category.Type)
+            .Select(category => category.toCategorySummaryDto())
+            .AsNoTracking()
+        );
         
         group.MapGet("/{id}", (int id, TrackITContext dbContext)=> 
             {
@@ -33,22 +39,21 @@ public static class CategoriesEndpoints{
                 return Results.CreatedAtRoute(GetCategoryEndpointName, new{id = category.Id}, category.toCategoryDetailsDto());
             });
 
-        group.MapPut("/{id}", (int id, UpdateCategoryDto updatedCategory) =>
+        group.MapPut("/{id}", (int id, UpdateCategoryDto updatedCategory, TrackITContext dbContext) =>
             {
-                var index = CategoryData.categoriesList.FindIndex(category=> category.Id==id);
-                if(index == -1) return Results.NotFound();
+                var existingCategory = dbContext.Categories.Find(id);
+                if(existingCategory is null) return Results.NotFound();
 
-                CategoryData.categoriesList[index] = new CategorySummaryDto(
-                    id,
-                    updatedCategory.Name,
-                    updatedCategory.Type
-                );
+                dbContext.Entry(existingCategory).CurrentValues.SetValues(updatedCategory.toEntity(id));
+                dbContext.SaveChanges();
                 return Results.NoContent();
             });
 
-        group.MapDelete("/{id}", (int id) => 
+        group.MapDelete("/{id}", (int id, TrackITContext dbContext) => 
             {
-                CategoryData.categoriesList.RemoveAll(category => category.Id==id);
+                dbContext.Categories
+                            .Where(category=>category.Id == id)
+                            .ExecuteDelete();
                 return Results.NoContent();
             });
 

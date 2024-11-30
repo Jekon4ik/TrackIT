@@ -6,26 +6,37 @@ namespace TrackIT.Api.Mapping;
 public static class CategoryMapping
 {
     public static Category toEntity(this CreateCategoryDto category){
-        return new Category () 
-        {
+        Category newCategory = new Category(){
             Name = category.Name,
             TypeId = category.TypeId
         };
+        return newCategory;
+    }
+
+    public static Category toEntity(this UpdateCategoryDto category, int id){
+        Category newCategory = new Category(){
+            Id = id,
+            Name = category.Name,
+            TypeId = category.TypeId
+        };
+        return newCategory;
     }
 
     public static CategoryDetailsDto toCategoryDetailsDto(this Category category){
-        return new CategoryDetailsDto(
+        CategoryDetailsDto categoryDetailsDto = new CategoryDetailsDto(
             category.Id,
             category.Name,
-            category.Type!.Id
-            );
+            category.TypeId
+        );
+        return categoryDetailsDto;
     }
 
     public static CategorySummaryDto toCategorySummaryDto(this Category category){
-        return new(
+        CategorySummaryDto categorySummaryDto = new CategorySummaryDto(
             category.Id,
             category.Name,
             category.Type!.Name
-            );
+        );
+        return categorySummaryDto;
     }
 }
