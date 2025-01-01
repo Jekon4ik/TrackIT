@@ -4,6 +4,6 @@ namespace TrackIT.Api.Dtos;
 
 public record class UpdateCategoryDto(
     [Required] [StringLength(20)]string Name,
-    [Range(1, int.MaxValue, ErrorMessage = "TypeId must be a positive integer.")]
+    [Range(1, 2, ErrorMessage = "There is no Type with such ID")]
     int TypeId
 );
